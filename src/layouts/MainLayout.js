@@ -4,9 +4,11 @@ import Footer from "../components/Footer";
 
 const MainLayout = (props) => {
   return (
-    <div>
+    <div className="page-overlay" id="page-overlay">
       <Header {...props} />
-      <div className="main">{props.children}</div>
+      <div className="main" id="main">
+        {props.children}
+      </div>
       <Footer />
     </div>
   );

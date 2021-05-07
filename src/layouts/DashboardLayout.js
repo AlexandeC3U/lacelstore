@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signOutUserStart } from "./../redux/User/user.actions";
 
-import Header from "./../components/Header";
+import Header from "./../components/HeaderDb";
 import VerticalNav from "./../components/VerticalNav";
 import Footer from "./../components/Footer";
 

@@ -1,28 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signOutUserStart } from "./../redux/User/user.actions";
 
-import Header from "./../components/Header";
+import HeaderDb from "./../components/HeaderDb";
 import VerticalNav from "./../components/VerticalNav";
 import Footer from "./../components/Footer";
 
 const AdminLayout = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const signOut = () => {
     dispatch(signOutUserStart());
+    history.push("/");
   };
 
   return (
     <div className="adminLayout">
-      <Header {...props} />
+      <HeaderDb {...props} />
       <div className="controlPanel">
         <div className="sidebar">
           <VerticalNav>
             <ul>
               <li>
-                <Link to="/admin">Home</Link>
+                <Link to="/admin">Products</Link>
+              </li>
+              <li>
+                <Link to="/coupon">Coupons</Link>
               </li>
               <li>
                 <span className="signOut" onClick={() => signOut()}>

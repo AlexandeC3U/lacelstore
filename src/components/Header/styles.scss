@@ -2,10 +2,26 @@
   height: 6.5rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
+  .container {
+    width: 100%;
+    background: white;
+    z-index: 5000;
+    display: block;
+
+    .overlay {
+      width: 100%;
+      height: 6.5rem;
+      position: absolute;
+      z-index: 500;
+      background: white;
+    }
+  }
+
   .wrap {
     position: relative;
     height: 100%;
     margin: 0 5%;
+    z-index: 1000;
 
     .logo {
       width: 15rem;
@@ -33,6 +49,8 @@
       padding: 0;
       margin: 0;
       height: 100%;
+      z-index: 1000;
+      background: white;
 
       ul,
       ul li {
@@ -72,7 +90,7 @@
 
       .cartTotal {
         position: absolute;
-        margin-left: 0.3rem;
+        margin-left: -0.2rem;
         margin-top: -1rem;
         background: lightgrey;
         border-radius: 100%;
@@ -109,4 +127,69 @@
       }
     }
   }
+
+  .shoppingcartWrap {
+    cursor: pointer;
+  }
+
+  .cart-active {
+    opacity: 1 !important;
+  }
+
+  .shoppingDiv {
+    position: absolute;
+    right: 3%;
+    z-index: 500;
+    background: white;
+    width: 35rem;
+    justify-content: center;
+    text-align: center;
+    padding: 10rem 2rem 2rem 2rem;
+    border-radius: 1rem;
+    border: 3px solid black;
+    transition: all 0.2s ease-in;
+    opacity: 0;
+    pointer-events: visible;
+
+    img {
+      width: 10rem;
+    }
+  }
+
+  .itemwrapper {
+    display: flex;
+    padding-bottom: 2rem;
+
+    .img {
+      border-radius: 1rem;
+
+      img {
+        border-radius: 1rem;
+      }
+    }
+
+    .itemsdetails {
+      text-align: left;
+      padding: 1rem;
+    }
+  }
+
+  .header-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.page-overlay {
+  transition: all 0.4s ease-in;
+}
+
+.page-overlay-active {
+  background-color: rgba(0, 0, 0, 0.25);
+  min-height: 100vh !important;
 }

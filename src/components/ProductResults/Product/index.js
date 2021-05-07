@@ -26,10 +26,26 @@ const Product = (product) => {
     type: "button",
   };
 
+  const addCart = async () => {
+    const cart = document.getElementById("shoppingdiv");
+    console.log(cart);
+    cart.classList.add("cart-active");
+  };
+
+  const toggleOverlay = () => {
+    const app = document.getElementById("page-overlay");
+    if (app !== null) {
+      app.classList.add("page-overlay-active");
+    }
+  };
+
   const handleAddToCart = (product) => {
     if (!product) return;
     dispatch(addProduct(product));
-    history.push("/cart");
+    setTimeout(() => {
+      addCart();
+      toggleOverlay();
+    }, 350);
   };
 
   return (

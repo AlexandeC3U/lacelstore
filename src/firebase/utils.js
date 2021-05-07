@@ -54,27 +54,12 @@ export const updateProduct = async (product) => {
   return docRef.update(product);
 };
 
-export const uploadImage = (productId, file, progress) => {
-  return new Promise((resolve, reject) => {
-    // create file reference
-    const filePath = `products/${productId}/product-image`;
-    const fileRef = storage.ref().child(filePath);
-
-    // upload task
-    const uploadTask = fileRef.put(file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => progress(snapshot),
-      (error) => reject(error),
-      () => {
-        resolve(uploadTask.snapshot.ref);
-      }
-    );
-  });
+export const addCoupon = async (coupon) => {
+  const docRef = firestore.collection("/kortingcodes");
+  return docRef.add(coupon);
 };
 
-export const getDownloadUrl = (productId) => {
-  const filePath = `products/${productId}/product-image`;
-  return storage.ref().child(filePath).getDownloadURL();
+export const deleteCoupon = async (couponID) => {
+  const docRef = firestore.collection("/kortingcodes").doc(couponID);
+  return docRef.delete();
 };

@@ -27,6 +27,7 @@ import Search from "./pages/Search";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import EditProduct from "./pages/Admin/editProduct";
+import Coupon from "./pages/Admin/Coupon";
 
 // Styles
 import "./default.scss";
@@ -39,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" id="app">
       <AdminToolbar />
       <Switch>
         <Route
@@ -152,6 +153,18 @@ const App = () => {
             <WithAdminAuth>
               <AdminLayout>
                 <EditProduct />
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+
+        <Route
+          exact
+          path="/coupon"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Coupon />
               </AdminLayout>
             </WithAdminAuth>
           )}

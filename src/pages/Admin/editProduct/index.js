@@ -9,6 +9,7 @@ import {
 import Button from "./../../../components/Forms/Button";
 import FormInput from "./../../../components/Forms/FormInput";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../assets/loader.gif";
 
 const mapState = (state) => ({
   product: state.productsData.product,
@@ -20,6 +21,7 @@ const EditProduct = () => {
   const { productID } = useParams();
   const { product } = useSelector(mapState);
   const [productDescr, setProductDescr] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   var {
     productThumbnail,
@@ -38,6 +40,7 @@ const EditProduct = () => {
 
     return () => {
       dispatch(setProduct({}));
+      setLoading(false);
     };
   }, []);
 
@@ -80,66 +83,81 @@ const EditProduct = () => {
     }
   };
 
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+
+  const formClassname = `${loading ? "loading" : ""}`;
+
   return (
     <div>
       <h2>Edit product:</h2>
       <div>
-        <form onSubmit={handleSubmit}>
-          <div style={{ justifyContent: "center", marginTop: "30px" }}>
-            <div>
-              <FormInput
-                id="productnaam"
-                label="Productnaam"
-                type="text"
-                required="required"
-                defaultValue={productName}
-              />
-            </div>
+        <form className={formClassname} onSubmit={handleSubmit}>
+          {!loading && (
+            <div style={{ justifyContent: "center", marginTop: "30px" }}>
+              <div>
+                <FormInput
+                  id="productnaam"
+                  label="Productnaam"
+                  type="text"
+                  required="required"
+                  defaultValue={productName}
+                />
+              </div>
 
-            <div style={{ paddingBottom: "1rem" }}>
-              <FormInput
-                id="productprijs"
-                label="Productprijs"
-                type="text"
-                required="required"
-                defaultValue={productPrice}
-              />
-            </div>
+              <div style={{ paddingBottom: "1rem" }}>
+                <FormInput
+                  id="productprijs"
+                  label="Productprijs"
+                  type="text"
+                  required="required"
+                  defaultValue={productPrice}
+                />
+              </div>
 
-            <label>
-              Categorie
-              <FormInput
-                id="productcategorie"
-                name="productCategory"
-                htmlFor="productCategorie"
-                required
-                defaultValue={productCategory}
-              ></FormInput>
-            </label>
+              <label>
+                Categorie
+                <br />
+                <br />
+                <select
+                  style={{ display: "block", border: "none", outline: "none" }}
+                  id="productcategorie"
+                  name="productCategory"
+                  htmlFor="productCategorie"
+                  required
+                  defaultValue={productCategory}
+                >
+                  <option value="mens">Mens</option>
+                  <option value="womens">Womens</option>
+                </select>
+              </label>
 
-            <div style={{ paddingTop: "1rem" }}>
-              <FormInput
-                id="producturl"
-                label="Producturl"
-                type="Url"
-                name="productThumbnail"
-                required="required"
-                defaultValue={productThumbnail}
-              />
-            </div>
+              <div style={{ paddingTop: "2rem" }}>
+                <FormInput
+                  id="producturl"
+                  label="Producturl"
+                  type="Url"
+                  name="productThumbnail"
+                  required="required"
+                  defaultValue={productThumbnail}
+                />
+              </div>
 
-            <div>
-              <CKEditor
-                id="productdesc"
-                data={productDesc}
-                name="productDesc"
-                htmlFor="productDesc"
-                onChange={(evt) => setProductDescr(evt.editor.getData())}
-              />
+              <div style={{ paddingTop: "1rem" }}>
+                <CKEditor
+                  id="productdesc"
+                  data={productDesc}
+                  name="productDesc"
+                  htmlFor="productDesc"
+                  onChange={(evt) => setProductDescr(evt.editor.getData())}
+                />
+              </div>
+              <br />
+              <Button type="submit">Submit</Button>
             </div>
-            <br />
-            <Button type="submit">Submit</Button>
-          </div>
+          )}
+          {loading && <img class="loader" src={Loader} />}
         </form>
       </div>
     </div>

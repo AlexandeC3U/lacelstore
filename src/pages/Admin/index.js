@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 import CKEditor from "ckeditor4-react";
 import MaterialTable from "material-table";
 import { updateProduct, firestore } from "../../firebase/utils";
-import { ProductImage } from "../../components/ProductImage";
 import "./styles.scss";
 
 const Admin = () => {
@@ -22,7 +21,6 @@ const Admin = () => {
   const [hideModal2, setHideModal2] = useState(true);
   const [productCategory, setProductCategory] = useState("mens");
   const [productName, setProductName] = useState("");
-  const [productImage, setProductImage] = useState("");
   const [productThumbnail, setProductThumbnail] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState("");
@@ -66,7 +64,6 @@ const Admin = () => {
     setHideModal2(true);
     setProductCategory("mens");
     setProductName("");
-    setProductImage("");
     setProductThumbnail("");
     setProductPrice(0);
     setProductDesc("");
@@ -202,59 +199,6 @@ const Admin = () => {
         </div>
       </Modal2>
 
-      {/* <div className="manageProducts">
-        <table border="0" cellPadding="0" cellSpacing="0">
-          <tbody>
-            <tr>
-              <th>
-                <h1>Manage Products</h1>
-              </th>
-            </tr>
-            <tr>
-              <td>
-                <table
-                  className="results"
-                  border="0"
-                  cellPadding="10"
-                  cellSpacing="0"
-                >
-                  <tbody>
-                    {Array.isArray(data) &&
-                      data.length > 0 &&
-                      data.map((product, index) => {
-                        const {
-                          productName,
-                          productThumbnail,
-                          productPrice,
-                          documentID,
-                        } = product;
-
-                        return (
-                          <tr key={index}>
-                            <td>
-                              <img className="thumb" src={productThumbnail} />
-                            </td>
-                            <td>{productName}</td>
-                            <td>€ {productPrice}</td>
-                            <td>
-                              <Button
-                                onClick={() =>
-                                  dispatch(deleteProductStart(documentID))
-                                }
-                              >
-                                Delete
-                              </Button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
       <div className="products-table">
         <br />
         <br />
@@ -297,8 +241,8 @@ const Admin = () => {
               title: "beschikbaarheid",
               field: "productInUse",
               lookup: {
-                true: "true",
-                false: "false",
+                true: "Beschikbaar",
+                false: "Niet beschikbaar",
               },
               render: (rowData) => (
                 <label className="switch">
